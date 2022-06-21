@@ -19,7 +19,7 @@ python3 apiReq.py
 ```
 
 ### main.py
-Obsahuje kód, ktorý vytvára lokálny server, vytvorenie databázového súboru a funkcie na spracovanie prichádzajúcich requestov. Po prijatí requestu sa následne spracuje aj zmena v databázovom súbore. Napríklad po GET requeste sa na základe ID z databázového súboru odošlú informácie ktore sú spojené s daným ID.  
+Obsahuje kód, ktorý vytvára lokálny server, vytvorenie databázového súboru a funkcie na spracovanie prichádzajúcich requestov. Po prijatí requestu sa následne spracuje aj zmena v databázovom súbore. Napríklad po GET requeste sa na základe ID z databázového súboru odošlú informácie, ktoré sú spojené s daným ID.  
 
 
 ### apiReq.py
