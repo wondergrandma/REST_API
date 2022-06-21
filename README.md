@@ -1,5 +1,6 @@
 # REST_API
 Jednoduché API pre správu textových príspevkov, API podporuje `GET`, `PUT`, `PATCH` a `DELETE` request. Dáta z prichádzajúcich PUT requestov sú ukladané do databázového systému SQLAlchemy.
+
 Formát textového príspevku: 
 ```
 [{"userId": 1, "id": 1, "title": "TITLE", "body": 'BODY'}]
@@ -22,4 +23,14 @@ Obsahuje kód, ktorý vytvára lokálny server, vytvorenie databázového súbor
 
 
 ### apiReq.py
-V súbore je definovaný zdroj dát, ktoré pochádzajú z externej API ďalej sa v ňom nachádzajú `GET`, `PUT`, `PATCH` a `DELETE` requesty, ktoré sú následne spracované a odoslané do súboru `main.py` kde sa spracujú a vykonajú príslušné úkony v databázovom súbore.   
+V súbore je definovaný zdroj dát, ktoré pochádzajú z externej API ďalej sa v ňom nachádzajú `GET`, `PUT`, `PATCH` a `DELETE` requesty, ktoré sú následne spracované a odoslané do súboru `main.py` kde sa spracujú a vykonajú príslušné úkony v databázovom súbore. Príkazy pre requesty sa vykonávajú samostatne prvý príkaz sa vykoná automaticky po spustení súboru ostatné príkazy sa vykonávajú po stlačení klávesy ENTER. 
+
+Príkazy sú v nasledovnom poradí:
+
+- **GET** - získa dáta z externej api
+- **PUT** - dáta uloží na server
+- **GET** - pošle dotaz pre databázu na získanie dát pod ID 4
+- **PATCH** - pošle dotaz na update dát pod ID 2
+- **DELETE** - pošle dotaz na delete dát pod ID 3
+- **GET** - pošle dotaz na získanie dát pod ID 3, následne vypíše ERROR
+
