@@ -86,7 +86,6 @@ class Status(Resource):
             result.body = args['body']
 
         db.session.commit()
-
         return result
 
     @app.route('/', methods = ['DELETE'])
