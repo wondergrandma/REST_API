@@ -32,6 +32,9 @@ put_args.add_argument("id", type = int, help = "ID required!", required = True)
 update_args.add_argument("title", type = str, help = "Title required!")
 update_args.add_argument("body", type = str, help = "Body required!")
 
+del_args = reqparse.RequestParser()
+del_args.add_argument("userId", type = int, help = "User ID required!", required = True)
+
 #Definovanie podoby dát s, ktorými sa pracuje
 resource_field = {
     'pk_id': fields.Integer,
@@ -44,6 +47,7 @@ resource_field = {
 #Definovanie requestov API
 #marshal_with zoberie vstupné dáta a upravý ich podla definície v resource_fields
 class Status(Resource):
+    @app.route('/', methods = ['GET'])
     @marshal_with(resource_field)
     def get(self, status_id):
         result = StatusManager.query.filter_by(pk_id=status_id).first()
@@ -52,7 +56,8 @@ class Status(Resource):
             abort(404, message = "Could not find status with this ID!")
 
         return result
-        
+    
+    @app.route('/', methods = ['PUT'])
     @marshal_with(resource_field)
     def put(self, status_id):
         args = put_args.parse_args()
@@ -67,6 +72,7 @@ class Status(Resource):
         db.session.commit()
         return status, 201
     
+    @app.route('/', methods = ['PATCH'])
     @marshal_with(resource_field)
     def patch(self, status_id):
         args = update_args.parse_args()
@@ -74,10 +80,6 @@ class Status(Resource):
 
         if not result:
             abort(404, message = "Status does not exist, cannot update!")
-        if args['userId']:
-            result.userId = args['userId']
-        if args['id']:
-            result.id = args['id']
         if args['title']:
             result.title = args['title']
         if args['body']:
@@ -87,10 +89,14 @@ class Status(Resource):
 
         return result
 
+    @app.route('/', methods = ['DELETE'])
     @marshal_with(resource_field)
     def delete(self, status_id):
-        
         result = StatusManager.query.filter_by(pk_id=status_id).first()
+
+        if not result:
+            abort(404, message = "Could not find status with this ID!")
+
         db.session.delete(result)
         db.session.commit()
         return result
