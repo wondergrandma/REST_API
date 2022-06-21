@@ -47,7 +47,7 @@ resource_field = {
 #Definovanie requestov API
 #marshal_with zoberie vstupné dáta a upravý ich podla definície v resource_fields
 class Status(Resource):
-    @app.route('/', methods = ['GET'])
+    #@app.route('/', methods = ['GET'])
     @marshal_with(resource_field)
     def get(self, status_id):
         result = StatusManager.query.filter_by(pk_id=status_id).first()
@@ -57,7 +57,7 @@ class Status(Resource):
 
         return result
     
-    @app.route('/', methods = ['PUT'])
+    #@app.route('/', methods = ['PUT'])
     @marshal_with(resource_field)
     def put(self, status_id):
         args = put_args.parse_args()
@@ -72,7 +72,7 @@ class Status(Resource):
         db.session.commit()
         return status, 201
     
-    @app.route('/', methods = ['PATCH'])
+    #@app.route('/', methods = ['PATCH'])
     @marshal_with(resource_field)
     def patch(self, status_id):
         args = update_args.parse_args()
@@ -88,7 +88,7 @@ class Status(Resource):
         db.session.commit()
         return result
 
-    @app.route('/', methods = ['DELETE'])
+    #@app.route('/', methods = ['DELETE'])
     @marshal_with(resource_field)
     def delete(self, status_id):
         result = StatusManager.query.filter_by(pk_id=status_id).first()
